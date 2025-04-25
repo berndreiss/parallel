@@ -58,15 +58,20 @@ double CalcPiParallelCritical(int n, int threads) {
     const double fH = 1.0 / (double)n;
 
     double fSum = 0.0;
-    double fX;
 
     omp_set_num_threads(threads);
-#pragma omp parallel for 
+#pragma omp parallel default(none) shared(fSum, fH, n)
+    {
+       double tempSum = 0;
+       double fX;
+#pragma omp for 
     for (int i = 0; i < n; i += 1) {
         fX = fH * ((double)i + 0.5);
-#pragma omp critical
-        fSum += f(fX);
+        tempSum += f(fX);
     }
+#pragma omp critical
+    fSum += tempSum;
+}
     return fH * fSum;
 }
 double CalcPiParallelAtomic(int n, int threads) {
@@ -76,15 +81,20 @@ double CalcPiParallelAtomic(int n, int threads) {
     const double fH = 1.0 / (double)n;
 
     double fSum = 0.0;
-    double fX;
 
     omp_set_num_threads(threads);
-#pragma omp parallel for 
+#pragma omp parallel default(none) shared(fSum, fH, n)
+    {
+       double tempSum = 0;
+       double fX;
+#pragma omp for 
     for (int i = 0; i < n; i += 1) {
         fX = fH * ((double)i + 0.5);
-#pragma omp atomic
-        fSum += f(fX);
+        tempSum += f(fX);
     }
+#pragma omp atomic
+    fSum += tempSum;
+}
     return fH * fSum;
 }
 double CalcPiParallelReduction(int n, int threads) {
@@ -94,12 +104,11 @@ double CalcPiParallelReduction(int n, int threads) {
     const double fH = 1.0 / (double)n;
 
     double fSum = 0.0;
-    double fX;
 
     omp_set_num_threads(threads);
 #pragma omp parallel for reduction(+:fSum)
     for (int i = 0; i < n; i += 1) {
-        fX = fH * ((double)i + 0.5);
+        double fX = fH * ((double)i + 0.5);
         fSum += f(fX);
     }
     return fH * fSum;
