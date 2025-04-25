@@ -1,7 +1,7 @@
 MPICC = mpicc
 CFLAGS = -Wall -O2
-TARGET = simple
-SRCS = simple.c
+TARGET = main
+SRCS = main.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(TARGET)

@@ -1,0 +1,15 @@
+
+
+ ===================== DATA =================== 
+Print out the data of the metric time
+
+                    Master thread             Master thread             
+-------------------------------------------------------------------------------
+main(id=0)          1.8304e-05               1.74686e-05              
+main(id=1)          0.0263775                0.0253132                
+MPI_Init(id=2)      1.01667                  1.01667                  
+MPI_Comm_rank(id=3) 7.61218e-06              5.39463e-06              
+MPI_Comm_size(id=4) 2.69097e-06              1.79688e-06              
+MPI_Send(id=5)      0.307783                 0.314532                 
+MPI_Recv(id=6)      0.347317                 0.341679                 
+MPI_Finalize(id=7)  5.44979e-05              1.48584e-05              

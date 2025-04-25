@@ -4,7 +4,7 @@
 
 #include <omp.h>
 
-#define RUNS 10
+#define RUNS 1
 
 float getRandFloat();
 double matrixMult(int n);

@@ -1,0 +1,7 @@
+PatternName               Count      Mean    Median      Minimum      Maximum      Sum     Variance    Quartil25    Quartil75
+mpi_latesender                236272 0.0000002 0.0000001 0.0000000003 0.0001601362 0.0385126928 0.0000000000 0.0000000882 0.0000002647
+- cnode 6 enter: 1.1696703234 exit: 1.1698326558 duration: 0.0001601362 rank: 1
+
+mpi_latereceiver              115168 0.0000001 0.0000001 0.0000000003 0.0000265655 0.0083982516 0.0000000000 0.0000000293 0.0000002048
+- cnode 5 enter: 1.2648251949 exit: 1.2648562670 duration: 0.0000265655 rank: 0
+
