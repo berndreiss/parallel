@@ -3,15 +3,21 @@
  ===================== DATA =================== 
 Print out the data of the metric time
 
-                    Master thread             
+                                         Master thread             OMP thread 1             Master thread             OMP thread 1             
 -------------------------------------------------------------------------------
-mainScorep(id=0)    8.78673e-06              
-main(id=1)          2.74292e-05              
-MPI_Init(id=2)      1.01393                  
-MPI_Comm_rank(id=3) 4.80636e-06              
-MPI_Comm_size(id=4) 1.72009e-06              
-cfr_iteration(id=5) 0.739578                 
-get_strategy(id=6)  0.269563                 
-MPI_Reduce(id=7)    1.24766e-05              
-get_strategy(id=8)  1.24866e-07              
-MPI_Finalize(id=9)  1.79821e-05              
+mainScorep(id=0)                         7.61952e-06              0                       7.64423e-06              0                       
+main(id=1)                               2.31651e-05              0                       1.96761e-05              0                       
+MPI_Init(id=2)                           1.01576                  0                       1.01576                  0                       
+MPI_Comm_rank(id=3)                      5.00267e-06              0                       4.64877e-06              0                       
+MPI_Comm_size(id=4)                      1.91774e-06              0                       1.73945e-06              0                       
+cfr_iteration(id=5)                      0.000131788              0                       0.000146902              0                       
+!$omp parallel @main.c:32(id=6)          6.4984e-06               2.49399e-06             6.31544e-06              2.45526e-06             
+!$omp for @main.c:38(id=7)               0.206082                 0.205283                0.208602                 0.204537                
+get_strategy(id=8)                       0.128811                 0.128413                0.129992                 0.128114                
+!$omp implicit barrier @main.c:82(id=9)  1.07105e-06              0.00117568              1.11378e-06              0.00592181              
+!$omp critical @main.c:84(id=10)         2.73705e-06              3.82212e-06             1.89103e-06              2.74439e-07             
+!$omp critical sblock @main.c:84(id=11)  4.13328e-07              1.59589e-07             3.57238e-07              1.34215e-07             
+!$omp implicit barrier @main.c:90(id=12) 5.30849e-06              5.2484e-07              3.09028e-06              1.32078e-06             
+MPI_Reduce(id=13)                        0.00371466               0                       4.36165e-06              0                       
+get_strategy(id=14)                      2.25027e-07              0                       0                        0                       
+MPI_Finalize(id=15)                      1.11879e-05              0                       1.29113e-05              0                       

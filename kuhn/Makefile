@@ -1,5 +1,5 @@
 CC = mpicc
-CFLAGS = -Wall -O2
+CFLAGS = -Wall -O2 -fopenmp
 
 TARGET = main
 TARGET_2 = main_serial

@@ -2,7 +2,7 @@
 
 rm -rf $1/scorep_measurements
 
-scorep mpicc $1/main.c -o $1/mainScorep
+scorep mpicc -fopenmp $1/main.c -o $1/mainScorep
 scalasca --analyze -e $1/scorep_measurements mpirun -n $2 $1/mainScorep $3 $4 $5
 cube_calltree -m time -p $1/scorep_measurements/profile.cubex
 cube_dump -m time -c all $1/scorep_measurements/profile.cubex > $1/metric_per_proc.txt
